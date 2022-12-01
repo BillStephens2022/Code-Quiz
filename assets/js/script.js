@@ -63,6 +63,7 @@ var optionsEl = document.getElementById("options")
 var timerEl = document.getElementById("timer");
 var startButton = document.getElementById("start-button");
 var commentEl = document.getElementById("comment");
+var initialsEl = document.getElementById("input-initials");
 
 
 var timeLeft = 30;
@@ -169,6 +170,16 @@ function checkAnswer(event) {
         commentEl.textContent = "Final Score: " + score + " out of " + questions.length;
         questionEl.textContent = "";
         clearQuestion();
+        var labelElement = document.createElement("label");
+        labelElement.textContent = "Add your initials to the High Score List!  ";
+        initialsEl.appendChild(labelElement);
+        var inputElement = document.createElement("input");
+        inputElement.type = "text";
+        inputElement.player = "player";
+        inputElement.placeholder = "your initials";
+        initialsEl.appendChild(inputElement);
+
+
         var userInitials = prompt("What are your initials?");
         var newScore = {userInitials: userInitials, score: score};
         
@@ -179,3 +190,5 @@ function checkAnswer(event) {
     };
     
 }
+
+
