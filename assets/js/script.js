@@ -64,11 +64,13 @@ var timerEl = document.getElementById("timer");
 var startButton = document.getElementById("start-button");
 var commentEl = document.getElementById("comment");
 
+
 var timeLeft = 30;
 var questionsIndex = 0;
 var score = 0;
 var gameOver;
 var UserInitials;
+var highScores = [];
 
 var doh = new Audio ("./assets/sounds/doh.mp3");
 var wooHoo = new Audio ("./assets/sounds/woohoo.mp3");
@@ -167,7 +169,13 @@ function checkAnswer(event) {
         commentEl.textContent = "Final Score: " + score + " out of " + questions.length;
         questionEl.textContent = "";
         clearQuestion();
-        userInitials = prompt("What are your initials?");
+        var userInitials = prompt("What are your initials?");
+        var newScore = {userInitials: userInitials, score: score};
+        
+        highScores.push(newScore);
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+        
+       
     };
     
 }
