@@ -56,16 +56,113 @@ var questions = [
             ],
         answer: "c) at the bottom of the body element"
     },
-]
+];
 
 var questionEl = document.getElementById("question");
 var optionsEl = document.getElementById("options")
+var timerEl = document.getElementById("timer");
+var startButton = document.getElementById("start-button");
+var commentEl = document.getElementById("comment");
 
-questionEl.textContent = "Question: " + questions[0].question;
-for (var i = 0; i < questions[i].options.length; i++) {
-    var answerButton = document.createElement("button");
-    optionsEl.appendChild(answerButton);
-    answerButton.innerHTML = questions[0].options[i];
-};
+var timeLeft = 30;
+var questionsIndex = 0;
+var score = 0;
+var gameOver;
+var UserInitials;
+
+startButton.addEventListener("click", function(){
+    init();
+    //startButton.disabled = true;
+    countdown();
+    playGame();
+});
+
+function playGame() {
+    nextQuestion();
+    optionsEl.addEventListener("click", checkAnswer);
+}
 
 
+function countdown() {
+    
+    var timeInterval = setInterval(function() {
+        if ((timeLeft > 1) && (gameOver === true)) {
+            clearInterval(timeInterval);
+            timerEl.textContent = "Game Over!";
+            
+            gameOver=false;
+            startButton.disabled = false;
+        } 
+        else if (timeLeft > 1) {
+            timerEl.textContent = "Time Remaining: " + timeLeft;
+            timeLeft--;
+        } else {
+            timerEl.textContent = "Time Up!";
+            startButton.disabled = false;
+            clearInterval(timeInterval);
+        }
+    }, 1000)
+}
+
+function nextQuestion(){
+    for (var i = 0; i < 4; i++) {
+        questionEl.classList.add("question-slide");
+        questionEl.textContent = "Question: " + questions[questionsIndex].question;
+        var answerButton = document.createElement("button");
+        answerButton.classList.add("answer-button");
+        optionsEl.appendChild(answerButton);
+        answerButton.innerHTML = questions[questionsIndex].options[i];
+    };
+}
+
+function clearQuestion() {
+    
+    var child = optionsEl.lastElementChild;
+    while (child) {
+        optionsEl.removeChild(child);
+        child = optionsEl.lastElementChild;
+    };
+    
+}
+
+function init() {
+    startButton.disabled = true;
+    gameOver = false;
+    timeLeft = 30;
+    questionEl.textContent = "";
+    commentEl.textContent = "";
+    questionsIndex = 0;
+    score = 0;
+    var child = optionsEl.lastElementChild;
+    while (child) {
+        optionsEl.removeChild(child);
+        child = optionsEl.lastElementChild;
+    };
+}
+
+function checkAnswer(event) {
+    var element = event.target;
+    
+    if (element.textContent === questions[questionsIndex].answer) {
+        commentEl.textContent = "Correct!";
+        score++;
+        answerSelected = true;
+    } else {
+        commentEl.textContent = "Incorrect!";
+        timeLeft-=5;
+        answerSelected = true;
+    };
+    questionsIndex++;
+
+    if ((questionsIndex < questions.length) && (timeLeft > 0)) {
+        clearQuestion();
+        playGame();
+    } else {
+        gameOver = true;
+        commentEl.textContent = "Final Score: " + score + " out of " + questions.length;
+        questionEl.textContent = "";
+        clearQuestion();
+        userInitials = prompt("What are your initials?");
+    };
+    
+}
