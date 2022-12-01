@@ -70,6 +70,9 @@ var score = 0;
 var gameOver;
 var UserInitials;
 
+var doh = new Audio ("./assets/sounds/doh.mp3");
+var wooHoo = new Audio ("./assets/sounds/woohoo.mp3");
+
 startButton.addEventListener("click", function(){
     init();
     //startButton.disabled = true;
@@ -145,10 +148,12 @@ function checkAnswer(event) {
     
     if (element.textContent === questions[questionsIndex].answer) {
         commentEl.textContent = "Correct!";
+        wooHoo.play();
         score++;
         answerSelected = true;
     } else {
         commentEl.textContent = "Incorrect!";
+        doh.play();
         timeLeft-=5;
         answerSelected = true;
     };
