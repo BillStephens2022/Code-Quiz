@@ -14,9 +14,11 @@ var questionsIndex = 0;
 var score = 0;
 var gameOver;
 var userInitials = "";
-var highScores = [];
+var highScores = getLocalStorage();
 
-
+function getLocalStorage() {
+    return JSON.parse(localStorage.getItem("highScores")) || [];
+}
 /* variables for audio objects which will be played when user answers
 correctly (wooHoo!) and incorrectly (doh!) */
 
