@@ -148,13 +148,14 @@ function gameOverSequence() {
         questionEl.textContent = "";
         clearQuestion();
         var labelElement = document.createElement("label");
-        labelElement.textContent = "Add your initials to the High Score List!  ";
+        labelElement.textContent = "Enter your initials for the High Scores List:";
         initialsEl.appendChild(labelElement);
         var inputElement = document.createElement("input");
         inputElement.classList.add("input-element");
         inputElement.type = "text";
         inputElement.player = "player";
-        inputElement.placeholder = "your initials";
+        inputElement.placeholder = "initials";
+        inputElement.maxLength = "2";
         inputElement.value = userInitials;
         initialsEl.appendChild(inputElement);
         var submitButton = document.createElement("button");
