@@ -6,6 +6,7 @@ This website is a timed Quiz Game with multiple choice questions about web devel
 
 Screenshot:
 
+![Screen Shot 2022-12-01 at 10 04 51 PM](https://user-images.githubusercontent.com/113722447/205207160-54e7bdfe-f54b-410b-935c-30cf10ae579d.png)
 
 
 ## Installation
