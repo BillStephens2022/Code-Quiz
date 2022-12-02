@@ -14,16 +14,25 @@
     </header>
     <h1>CODE QUIZ</h1>
     <div id="quiz">
-        <div id="timer">Time Remaining: 30</div>
+
+        <!-- game timer -->
+        <div id="timer">Time Remaining: 30</div>   
+        <!-- button to start game -->
         <button id="start-button">Start Game</button>
+        <!-- element where each new quiz question will appear -->
         <h2 id="question"></h2>
+        <!-- element where each multiple choice options will appear -->
         <ul id="options"></ul>
     </div>
+    <!-- element which will show whether answer was correct/incorrect.   
+    This will also show final score at end of round -->
     <h2 id="comment"></h2>
-    
+    <!-- at end of game user will be asked to input initials into a dynamically
+    created html input element -->
     <div id="input-initials"></div>
-    
-    
+    <!-- questions.js is holds the array of question objects and script.js
+     is the main javascript file -->
+    <script src="./assets/js/questions.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
