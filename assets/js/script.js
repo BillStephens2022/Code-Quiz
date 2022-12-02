@@ -134,7 +134,16 @@ function checkAnswer(event) {
         clearQuestion();
         playGame();
     } else {
-        gameOver = true;
+        gameOverSequence();
+    }; 
+}
+
+/* function for game over.  Shows final score, clears questions/answers from screen,
+and asks user to input initials to add to the high scores list.  Initials and scores
+are saved into local storage and rendered on the highscores.html page. */
+
+function gameOverSequence() {
+    gameOver = true;
         commentEl.textContent = "Final Score: " + score + " out of " + questions.length;
         questionEl.textContent = "";
         clearQuestion();
@@ -162,5 +171,4 @@ function checkAnswer(event) {
             inputElement.remove();
             submitButton.remove();
         });
-    }; 
 }
