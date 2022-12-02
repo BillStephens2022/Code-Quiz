@@ -70,7 +70,7 @@ var timeLeft = 30;
 var questionsIndex = 0;
 var score = 0;
 var gameOver;
-var UserInitials;
+var userInitials = "";
 var highScores = [];
 
 var doh = new Audio ("./assets/sounds/doh.mp3");
@@ -144,6 +144,7 @@ function init() {
         optionsEl.removeChild(child);
         child = optionsEl.lastElementChild;
     };
+    
 }
 
 function checkAnswer(event) {
@@ -174,17 +175,30 @@ function checkAnswer(event) {
         labelElement.textContent = "Add your initials to the High Score List!  ";
         initialsEl.appendChild(labelElement);
         var inputElement = document.createElement("input");
+        inputElement.classList.add("input-element");
         inputElement.type = "text";
         inputElement.player = "player";
         inputElement.placeholder = "your initials";
+        inputElement.value = userInitials;
         initialsEl.appendChild(inputElement);
-
-
-        var userInitials = prompt("What are your initials?");
-        var newScore = {userInitials: userInitials, score: score};
+        var submitButton = document.createElement("button");
+        submitButton.innerHTML = "Submit";
+        initialsEl.appendChild(submitButton);
+        submitButton.classList.add("submit-button");
+        submitButton.addEventListener("click", function() {
+            userInitials = document.querySelector(".input-element").value;
+            var newScore = {userInitials: userInitials, score: score};
         
-        highScores.push(newScore);
-        localStorage.setItem("highScores", JSON.stringify(highScores));
+            highScores.push(newScore);
+            localStorage.setItem("highScores", JSON.stringify(highScores));
+            labelElement.remove();
+            userInitials = "";
+            inputElement.remove();
+            submitButton.remove();
+        });
+
+     
+       
         
        
     };
